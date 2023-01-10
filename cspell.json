@@ -1,0 +1,17 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "codebeat"
+  ],
+  "flagWords": [],
+  "dictionaries": [
+    "typescript"
+  ],
+  "ignorePaths": [
+    "**/*.svg",
+    "coverage/**",
+    "dist/**",
+    "package.json"
+  ]
+}
