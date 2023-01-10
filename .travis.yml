@@ -1,4 +1,4 @@
-# https://github.com/andreashuber69/async-css-plugin#--
+# https://github.com/andreashuber69/capped-promise#--
 os: linux
 dist: xenial
 language: node_js
@@ -28,7 +28,7 @@ after_script:
 
 deploy:
   provider: npm
-  cleanup: false
+  skip_cleanup: true
   email:
     secure: mQMBAXV/bwyLqB0fPi9OBzSf1JuBEiJ147jW0plRFs1MaI/pg8XbxhM7Qw/i8HC0HwxJjDreo90IHTfP9Zqy0gTdh/tUMPRbMIF5V7OlZ2doTcHbvS7dvZl6sK5dWp7L3ND+gYn1R0B0096LCIpxc4wCb3Pb6lkXV/EvMogca2AQDNlfMoOenPXHCzSJjBJZND9enjcmuaCKph9aLXIhkf9fcvw+FoglLi5J6mtMUp1wtO2zXhvbRVmflfsYqfOpJryBGU7EmJjA57/kNw6mTF/9Y9PDK/0v3HlNNvJexiriyltSTUJ3kmGnZJpwsCllJ0XthicRSs6MdLLr0CSMyR0Q185v+w7EIGtLya/zJsrB7wq4WRKZbLUudVuCUXfDB3+HmE0CqBnNVAMkR8NQwi6dU4Q6sToY8YeXT4+QOLuPpMgP2xDFPg+2YO2WzSCETZQVMtZ0zqMXRezFy2QlfYdthIXeSK0MHNJ2jcDiwB+KhhjrmVrW86IMwhA6NHz7qgeJRdu/f098X0O/YwlI7bIhjxRATojPOt5CXeNNablwFrcCXEEmVy6TtBcSHdBsiVVs+l9VY5yC7ySGJUlEOEIRcOffrXjZ6MG28I+0dYkGu/mEJmgVIiUe7nZ4YaLQanEsLKyRfdS6HhB0hA8A3xqiAXyRoe263P1zKG3eGOk=
   api_token:
