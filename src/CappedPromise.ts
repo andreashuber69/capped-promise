@@ -16,5 +16,37 @@ export = class CappedPromise {
         return this.#cap;
     }
 
+    public async all<T extends ReadonlyArray<() => unknown>>(createAwaitableIterable: T) {
+        const results = new Array<unknown>();
+        const pending = new Array<Promise<number>>();
+
+        while (results.length < createAwaitableIterable.length) {
+            pending.push(
+                CappedPromise.#awaitAndStoreResult(createAwaitableIterable[results.length], results, pending.length),
+            );
+
+            if (pending.length === this.cap) {
+                // eslint-disable-next-line no-await-in-loop
+                pending.splice(await Promise.race(pending));
+            }
+        }
+
+        await Promise.all(pending);
+
+        return results as { -readonly [P in keyof T]: Awaited<ReturnType<T[P]>> };
+    }
+
+    static async #awaitAndStoreResult(createAwaitable: unknown, results: unknown[], result: number) {
+        if (typeof createAwaitable !== "function") {
+            throw new TypeError(`createAwaitable is not a function: ${createAwaitable}.`);
+        }
+
+        const index = results.push(undefined) - 1;
+        // eslint-disable-next-line require-atomic-updates
+        results[index] = await createAwaitable();
+
+        return result;
+    }
+
     readonly #cap: number;
 };

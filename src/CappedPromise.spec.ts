@@ -20,4 +20,17 @@ describe("CappedPromise", () => {
             expect(new CappedPromise({ cap: 42 }).cap).to.equal(42);
         });
     });
+    describe("all", () => {
+        it("should call each Promise-returning function, await and return the results", async () => {
+            const sut = new CappedPromise();
+
+            const argument =
+                [async () => await Promise.resolve(1), async () => await Promise.resolve("hello")] as const;
+
+            const result = await sut.all(argument);
+
+            expect(result[0]).to.equal(1);
+            expect(result[1]).to.equal("hello");
+        });
+    });
 });
