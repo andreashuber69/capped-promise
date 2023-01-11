@@ -16,7 +16,11 @@ export = class CappedPromise {
         return this.#cap;
     }
 
-    public async all<T extends ReadonlyArray<() => unknown>>(createAwaitableIterable: T) {
+    public async all<T extends ReadonlyArray<() => unknown>>(
+        createAwaitableArray: T
+    ): Promise<{ -readonly [P in keyof T]: Awaited<ReturnType<T[P]>> }>;
+    public async all<T>(createAwaitableIterable: Iterable<() => PromiseLike<T> | T>): Promise<Array<Awaited<T>>>;
+    public async all(createAwaitableIterable: Iterable<() => unknown>) {
         const results = new Array<unknown>();
         const pending = new Array<Promise<number>>();
 
@@ -33,7 +37,7 @@ export = class CappedPromise {
 
         await Promise.all(pending);
 
-        return results as { -readonly [P in keyof T]: Awaited<ReturnType<T[P]>> };
+        return results;
     }
 
     static async #awaitAndStoreResult(createAwaitable: unknown, results: unknown[], result: number) {
