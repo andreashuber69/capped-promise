@@ -1,7 +1,10 @@
 // https://github.com/andreashuber69/capped-promise#--
-import { expect } from "chai";
+import { expect, use } from "chai";
+import chaiAsPromised from "chai-as-promised";
 
 import CappedPromise from "./CappedPromise";
+
+use(chaiAsPromised);
 
 const iterable = function *iterable() {
     yield async () => await Promise.resolve(1);
@@ -47,6 +50,15 @@ describe("CappedPromise", () => {
 
             expect(result0).to.equal(1);
             expect(result1).to.equal(2);
+        });
+
+        it("should throw for non-functions", async () => {
+            const sut = new CappedPromise();
+
+            await expect(sut.all([42 as unknown as () => Promise<number>])).to.eventually.be.rejectedWith(
+                TypeError,
+                "createAwaitable is not a function: 42.",
+            );
         });
     });
 });
