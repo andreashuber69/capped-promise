@@ -20,9 +20,9 @@ export = class CappedPromise {
         const results = new Array<unknown>();
         const pending = new Array<Promise<number>>();
 
-        while (results.length < createAwaitableIterable.length) {
+        for (const createAwaitable of createAwaitableIterable) {
             pending.push(
-                CappedPromise.#awaitAndStoreResult(createAwaitableIterable[results.length], results, pending.length),
+                CappedPromise.#awaitAndStoreResult(createAwaitable, results, pending.length),
             );
 
             if (pending.length === this.cap) {
