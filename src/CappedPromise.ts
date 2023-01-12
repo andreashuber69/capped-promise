@@ -31,7 +31,7 @@ export = class CappedPromise {
 
             if (pending.length === this.cap) {
                 // eslint-disable-next-line no-await-in-loop
-                pending.splice(await Promise.race(pending));
+                pending.splice(await Promise.race(pending), 1);
             }
         }
 
