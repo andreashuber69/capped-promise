@@ -11,7 +11,7 @@ const iterable = function *iterable() {
     yield async () => await Promise.resolve(2);
 };
 
-type State = "created" | "init" | "pending" | "resolved";
+type State = "created" | "init" | "pending" | "settled";
 
 describe("CappedPromise", () => {
     describe("constructor", () => {
@@ -54,24 +54,26 @@ describe("CappedPromise", () => {
             expect(result1).to.equal(2);
         });
 
-        it("should only create new awaitables when all previous ones have been resolved", async () => {
-            const sut = new CappedPromise({ cap: 1 });
+        it("should only create new awaitables when all previous ones are pending or settled", async () => {
+            const sut = new CappedPromise({ cap: 3 });
             const states = new Array<State>(5).fill("init");
 
             const argument = states.map((_, index, array) => (
                 async () => {
-                    // Previous awaitables must be resolved
-                    expect(array.findIndex((state) => state !== "resolved")).to.equal(index);
+                    // Previous awaitables must be pending or settled
+                    expect(array.findIndex((state) => state !== "pending" && state !== "settled")).to.equal(index);
                     // Next awaitables must be in initial state
                     expect(array.slice(index).findIndex((state) => state !== "init")).to.equal(-1);
                     array[index] = "created";
                     const promise = Promise.resolve(index);
                     array[index] = "pending";
-                    const result = await promise;
-                    // eslint-disable-next-line require-atomic-updates
-                    array[index] = "resolved";
 
-                    return result;
+                    try {
+                        return await promise;
+                    } finally {
+                        // eslint-disable-next-line require-atomic-updates
+                        array[index] = "settled";
+                    }
                 }
             ));
 
