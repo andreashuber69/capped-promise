@@ -11,7 +11,7 @@ const iterable = function *iterable() {
     yield async () => await Promise.resolve(2);
 };
 
-type State = "created" | "init" | "pending" | "settled";
+type State = "init" | "pending" | "settled";
 
 describe("CappedPromise", () => {
     describe("constructor", () => {
@@ -64,7 +64,6 @@ describe("CappedPromise", () => {
                     expect(array.findIndex((state) => state !== "pending" && state !== "settled")).to.equal(index);
                     // Next awaitables must be in initial state
                     expect(array.slice(index).findIndex((state) => state !== "init")).to.equal(-1);
-                    array[index] = "created";
                     const promise = Promise.resolve(index);
                     array[index] = "pending";
 
