@@ -62,18 +62,40 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should throw for invalid maxPending", async () => {
+        it("should fulfill with empty array if passed empty array", async () => {
+            expect((await CappedPromise.all(5, [])).length).to.equal(0);
+        });
+
+        it("should reject for invalid maxPending", async () => {
             await expect(CappedPromise.all(0, [])).to.eventually.be.rejectedWith(
                 RangeError,
                 "maxPending is invalid: 0.",
             );
         });
 
-        it("should throw for non-functions", async () => {
+        it("should reject for non-functions", async () => {
             await expect(CappedPromise.all(5, [42 as unknown as () => Promise<number>])).to.eventually.be.rejectedWith(
                 TypeError,
                 "createAwaitable is not a function: 42.",
             );
+        });
+
+        it("with maxPending 1, should not create next awaitable when first rejects", async () => {
+            const argument = [
+                async () => await Promise.reject(new Error("Boom!")),
+                () => { throw new Error("This should not happen..."); },
+            ] as const;
+
+            await expect(CappedPromise.all(1, argument)).to.eventually.be.rejectedWith(Error, "Boom!");
+        });
+
+        it("with maxPending 2, should attempt to create both awaitables", async () => {
+            const argument = [
+                async () => await Promise.reject(new Error("This should not happen...")),
+                () => { throw new Error("Boom!"); },
+            ] as const;
+
+            await expect(CappedPromise.all(2, argument)).to.eventually.be.rejectedWith(Error, "Boom!");
         });
     });
 });
