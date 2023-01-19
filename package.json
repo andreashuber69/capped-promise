@@ -39,7 +39,7 @@
     "ci": "npm run test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.1",
+    "@andreashuber69/eslint-config": "^1.1.2",
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/chai": "^4.3.4",
     "@types/chai-as-promised": "^7.1.5",
@@ -48,7 +48,7 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "codeclimate-test-reporter": "^0.5.1",
-    "cspell": "^6.18.1",
+    "cspell": "^6.19.2",
     "lite-server": "^2.6.1",
     "markdownlint-cli": "^0.33.0",
     "ts-mocha": "^10.0.0",
