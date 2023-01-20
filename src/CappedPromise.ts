@@ -17,6 +17,21 @@ export = class CappedPromise {
         return results.map((r) => (r.status === "fulfilled" ? r.value : undefined));
     }
 
+    public static async allSettled<T extends ReadonlyArray<() => unknown>>(
+        maxPending: number,
+        createAwaitableArray: T,
+    ): Promise<{ -readonly [P in keyof T]: PromiseSettledResult<Awaited<ReturnType<T[P]>>> }>;
+    public static async allSettled<T>(
+        maxPending: number,
+        createAwaitableIterable: Iterable<() => PromiseLike<T> | T>,
+    ): Promise<Array<PromiseSettledResult<Awaited<T>>>>;
+    public static async allSettled(
+        maxPending: number,
+        createAwaitableIterable: Iterable<() => unknown>,
+    ) {
+        return await this.#all(maxPending, false, createAwaitableIterable);
+    }
+
     private constructor() {}
 
     static async #all(
@@ -39,7 +54,7 @@ export = class CappedPromise {
 
             // eslint-disable-next-line no-await-in-loop
             await this.#settle(pending, results, propagateRejections, maxPending - 1);
-            pending.set(nextIndex, this.#storeResult(createAwaitable, results, nextIndex));
+            pending.set(nextIndex, this.#storeResult(createAwaitable(), results, nextIndex));
             ++nextIndex;
         }
 
@@ -67,18 +82,18 @@ export = class CappedPromise {
     }
 
     static async #storeResult(
-        createAwaitable: () => unknown,
+        awaitable: unknown,
         results: Array<PromiseSettledResult<unknown>>,
         index: number,
     ) {
-        results[index] = await this.#getResult(createAwaitable);
+        results[index] = await this.#getResult(awaitable);
 
         return index;
     }
 
-    static async #getResult(createAwaitable: () => unknown): Promise<PromiseSettledResult<unknown>> {
+    static async #getResult(awaitable: unknown): Promise<PromiseSettledResult<unknown>> {
         try {
-            return { status: "fulfilled", value: await createAwaitable() };
+            return { status: "fulfilled", value: await awaitable };
         } catch (error: unknown) {
             return { status: "rejected", reason: error };
         }
