@@ -11,6 +11,9 @@ const iterable = function *iterable() {
     yield async () => await Promise.resolve(2);
 };
 
+const delay = async <T>(delayMilliseconds: number, result: T) =>
+    await new Promise<T>((resolve) => setTimeout(() => resolve(result), delayMilliseconds));
+
 type State = "init" | "pending" | "settled";
 
 describe("CappedPromise", () => {
@@ -64,6 +67,20 @@ describe("CappedPromise", () => {
 
         it("should fulfill with empty array if passed empty array", async () => {
             expect((await CappedPromise.all(5, [])).length).to.equal(0);
+        });
+
+        it("results should be added in the awaitable creation order", async () => {
+            const argument = [
+                async () => await delay(300, 0),
+                async () => await delay(200, 1),
+                async () => await delay(100, 2),
+            ] as const;
+
+            const results = await CappedPromise.all(3, argument);
+
+            for (const [index, value] of results.entries()) {
+                expect(value).to.equal(index);
+            }
         });
 
         it("should reject for invalid maxPending", async () => {
@@ -153,6 +170,20 @@ describe("CappedPromise", () => {
             expect((await CappedPromise.allSettled(5, [])).length).to.equal(0);
         });
 
+        it("results should be added in the awaitable creation order", async () => {
+            const argument = [
+                async () => await delay(300, 0),
+                async () => await delay(200, 1),
+                async () => await delay(100, 2),
+            ] as const;
+
+            const results = await CappedPromise.allSettled(3, argument);
+
+            for (const [index, value] of results.entries()) {
+                expect(value.status === "fulfilled" ? value.value : undefined).to.equal(index);
+            }
+        });
+
         it("should reject for invalid maxPending", async () => {
             await expect(CappedPromise.allSettled(0, [])).to.eventually.be.rejectedWith(
                 RangeError,
@@ -178,7 +209,7 @@ describe("CappedPromise", () => {
             await expect(CappedPromise.allSettled(1, argument)).to.eventually.be.rejectedWith(Error, "Boom!");
         });
 
-        it("with maxPending 2, should reject with error thrown from first awaitable", async () => {
+        it("with maxPending 2, should reject with error thrown from first createAwaitable", async () => {
             const argument = [
                 () => { throw new Error("Boom!"); },
                 async () => await Promise.reject(new Error("This should not happen...")),
