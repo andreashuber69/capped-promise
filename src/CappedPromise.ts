@@ -37,34 +37,32 @@ export = class CappedPromise {
                 throw new TypeError(`createAwaitable is not a function: ${createAwaitable}.`);
             }
 
-            if (pending.size === maxPending) {
-                // eslint-disable-next-line no-await-in-loop
-                await this.#settleNext(pending, results, propagateRejections);
-            }
-
+            // eslint-disable-next-line no-await-in-loop
+            await this.#settle(pending, results, propagateRejections, maxPending - 1);
             pending.set(nextIndex, this.#storeResult(createAwaitable, results, nextIndex));
             ++nextIndex;
         }
 
-        while (pending.size > 0) {
-            // eslint-disable-next-line no-await-in-loop
-            await this.#settleNext(pending, results, propagateRejections);
-        }
+        await this.#settle(pending, results, propagateRejections, 0);
 
         return results;
     }
 
-    static async #settleNext(
+    static async #settle(
         pending: Map<number, Promise<number>>,
         results: Array<PromiseSettledResult<unknown>>,
         propagateRejections: boolean,
+        maxPending: number,
     ) {
-        const settledIndex = await Promise.race(pending.values());
-        pending.delete(settledIndex);
-        const result = results[settledIndex];
+        while (pending.size > maxPending) {
+            // eslint-disable-next-line no-await-in-loop
+            const settledIndex = await Promise.race(pending.values());
+            pending.delete(settledIndex);
+            const result = results[settledIndex];
 
-        if (propagateRejections && (result?.status === "rejected")) {
-            throw result.reason;
+            if (propagateRejections && (result?.status === "rejected")) {
+                throw result.reason;
+            }
         }
     }
 
