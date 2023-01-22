@@ -1,4 +1,4 @@
-// https://github.com/andreashuber69/capped-promise#--
+// https://github.com/andreashuber69/capped-promise/blob/develop/README.md#--
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import fetch from "node-fetch";

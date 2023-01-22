@@ -1,4 +1,4 @@
-// https://github.com/andreashuber69/capped-promise#--
+// https://github.com/andreashuber69/capped-promise/blob/develop/README.md#--
 export = class CappedPromise {
     public static async all<T extends ReadonlyArray<() => unknown>>(
         maxPending: number,

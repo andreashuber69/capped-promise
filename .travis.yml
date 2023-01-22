@@ -1,4 +1,4 @@
-# https://github.com/andreashuber69/capped-promise#--
+# https://github.com/andreashuber69/capped-promise/blob/develop/README.md#--
 os: linux
 dist: xenial
 language: node_js

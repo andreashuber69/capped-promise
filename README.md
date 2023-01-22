@@ -1,6 +1,6 @@
-<p align="center">
+<h1 align="center">
   <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true">
-</p>
+</h1>
 <h1 align="center">Capped Promise</h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/capped-promise">
