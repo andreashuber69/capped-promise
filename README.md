@@ -2,7 +2,6 @@
   <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true"><br>
   Capped Promise
 </h1>
-<h1 align="center">Capped Promise</h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/capped-promise">
     <img src="https://img.shields.io/npm/v/capped-promise" alt="NPM Version">
