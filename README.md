@@ -1,6 +1,6 @@
 <h1 align="center">
   <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true"><br>
-  Capped Promise
+  CappedPromise
 </h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/capped-promise">
@@ -34,8 +34,8 @@ promises. This is useful e.g. when you need to make thousands of requests to a s
 with all requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one
 settles, the next one is initiated automatically.
 
-This is a ES2019 CommonJS module, that works exactly the same way in ES modules (because there's only an unnamed default
-export). TypeScript typings are provided.
+This is a ES2019 CommonJS module, that works exactly the same way in CommonJS and ES modules (because there's only an
+unnamed default export). TypeScript typings are provided.
 
 ## Installation
 
@@ -44,7 +44,8 @@ export). TypeScript typings are provided.
 ## Example
 
 ```ts
-import fetch from "node-fetch"; // Only necessary in node, fetch is natively supported in a browser.
+// Only necessary in node, fetch is natively available in a browser.
+import fetch from "node-fetch";
 import CappedPromise from "capped-promise";
 
 const getText = async (url: string) => {
