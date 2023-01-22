@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/master/doc/icon.svg?sanitize=true">
+  <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true">
 </h1>
 <h1 align="center">Capped Promise</h1>
 <p align="center">
