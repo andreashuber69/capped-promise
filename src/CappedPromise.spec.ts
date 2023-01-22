@@ -115,7 +115,7 @@ describe("CappedPromise", () => {
             // We allow at most 2 simultaneous requests. So, in the beginning the first
             // two promises are created right away. As soon as one of those is fulfilled,
             // the third is automatically created. When the responses for all requests are
-            // in, the results are returned and assigned to cappedResults.
+            // in, the returned promise fulfills.
             const cappedResults = await CappedPromise.all(2, createCssPromises);
 
             expect(cappedResults.length).to.equal(promiseResults.length);

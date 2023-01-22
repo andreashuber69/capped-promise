@@ -1,5 +1,6 @@
 <h1 align="center">
-  <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true">
+  <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true"><br>
+  Capped Promise
 </h1>
 <h1 align="center">Capped Promise</h1>
 <p align="center">
@@ -34,6 +35,9 @@ promises. This is useful e.g. when you need to make thousands of requests to a s
 with all requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one
 settles, the next one is initiated automatically.
 
+This is a ES2019 CommonJS module, that works exactly the same way in ES modules (because there's only an unnamed default
+export). TypeScript typings are provided.
+
 ## Installation
 
 `npm install capped-promise`
@@ -41,6 +45,9 @@ settles, the next one is initiated automatically.
 ## Example
 
 ```ts
+import fetch from "node-fetch"; // Only necessary in node, fetch is natively supported in a browser.
+import CappedPromise from "capped-promise";
+
 const getText = async (url: string) => {
     const response = await fetch(url);
 
@@ -69,7 +76,7 @@ const createCssPromises = cssUrls.map((url) => () => getText(url));
 // We allow at most 2 simultaneous requests. So, in the beginning the first
 // two promises are created right away. As soon as one of those is fulfilled,
 // the third is automatically created. When the responses for all requests are
-// in, the results are returned and assigned to cappedResults.
+// in, the returned promise fulfills.
 const cappedResults = await CappedPromise.all(2, createCssPromises);
 ```
 
