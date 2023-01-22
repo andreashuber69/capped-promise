@@ -1,6 +1,7 @@
 // https://github.com/andreashuber69/capped-promise#--
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
+import fetch from "node-fetch";
 
 import CappedPromise from "./CappedPromise";
 
@@ -69,7 +70,7 @@ describe("CappedPromise", () => {
             expect((await CappedPromise.all(5, [])).length).to.equal(0);
         });
 
-        it("results should be added in the awaitable creation order", async () => {
+        it("should add results in the awaitable creation order", async () => {
             const argument = [
                 async () => await delay(300, 0),
                 async () => await delay(200, 1),
@@ -81,6 +82,48 @@ describe("CappedPromise", () => {
             for (const [index, value] of results.entries()) {
                 expect(value).to.equal(index);
             }
+        });
+
+        it("should work with example code", async () => {
+            /* eslint-disable @typescript-eslint/promise-function-async */
+            // eslint-disable-next-line unicorn/consistent-function-scoping
+            const getText = async (url: string) => {
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Unexpected response");
+                }
+
+                return await response.text();
+            };
+
+            const cssUrls = [
+                "https://fonts.googleapis.com/css2?family=Roboto",
+                "https://fonts.googleapis.com/css2?family=Open+Sans",
+                "https://fonts.googleapis.com/css2?family=Poppins",
+            ];
+
+            // Promise.all
+            // We pass already pending promises.
+            const cssPromises = cssUrls.map((url) => getText(url));
+            // All requests are made at the same time.
+            const promiseResults = await Promise.all(cssPromises);
+
+            // CappedPromise.all
+            // We pass promise-creating functions instead of promises.
+            const createCssPromises = cssUrls.map((url) => () => getText(url));
+            // We allow at most 2 simultaneous requests. So, in the beginning the first
+            // two promises are created right away. As soon as one of those is fulfilled,
+            // the third is automatically created. When the responses for all requests are
+            // in, the results are returned and assigned to cappedResults.
+            const cappedResults = await CappedPromise.all(2, createCssPromises);
+
+            expect(cappedResults.length).to.equal(promiseResults.length);
+
+            for (const [index, result] of cappedResults.entries()) {
+                expect(result).to.equal(promiseResults[index]);
+            }
+            /* eslint-enable @typescript-eslint/promise-function-async */
         });
 
         it("should reject for invalid maxPending", async () => {

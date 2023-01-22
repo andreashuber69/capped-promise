@@ -30,6 +30,69 @@
 
 <h1 align="center">Capped Promise</h1>
 
-This is a placeholder release that doesn't provide anything of value.
+Provides replacements for `Promise.all` and `Promise.allSettled` that allow to cap the number of simultaneously pending
+promises. This is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it
+with all requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one
+settles, the next one is initiated automatically.
 
-**Don't use this (yet)!**
+## Installation
+
+`npm install capped-promise`
+
+## Example
+
+```ts
+const getText = async (url: string) => {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error("Unexpected response");
+    }
+
+    return await response.text();
+};
+
+const cssUrls = [
+    "https://fonts.googleapis.com/css2?family=Roboto",
+    "https://fonts.googleapis.com/css2?family=Open+Sans",
+    "https://fonts.googleapis.com/css2?family=Poppins",
+];
+
+// Promise.all
+// We pass already pending promises.
+const cssPromises = cssUrls.map((url) => getText(url));
+// All requests are made at the same time.
+const promiseResults = await Promise.all(cssPromises);
+
+// CappedPromise.all
+// We pass promise-creating functions instead of promises.
+const createCssPromises = cssUrls.map((url) => () => getText(url));
+// We allow at most 2 simultaneous requests. So, in the beginning the first
+// two promises are created right away. As soon as one of those is fulfilled,
+// the third is automatically created. When the responses for all requests are
+// in, the results are returned and assigned to cappedResults.
+const cappedResults = await CappedPromise.all(2, createCssPromises);
+```
+
+## Interface
+
+`Promise.all` and `Promise.allSettled` accept iterables of awaitables (usually promises). By its very nature, once a
+promise has been created, it is in the state *pending*. That is, the underlying operation is already running. So, if you
+create e.g. 1000 `Promise` objects by calling [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/fetch)
+repeatedly (without `await`ing them), all those requests will be made quasi simultaneously, if you pass them to
+`Promise.all` and then `await` the result. This is why `CappedPromise.all` and `CappedPromise.allSettled` differ from
+their `Promise` counterparts as follows:
+
+- Instead of awaitables, they accept parameterless functions that are expected to create and return awaitables. The
+  `CappedPromise` implementation will then call these functions to create new awaitables as necessary.
+- The first parameter is `maxPending`, which specifies how many promises can at most be pending simultaneously.
+
+Otherwise, `CappedPromise.all` and `CappedPromise.allSettled` follow their `Promise` counterparts.
+
+## Behavior
+
+Again, the `CappedPromise` behavior follows the `Promise` behavior as much as possible. However, due to the different
+interface there is the following additional concern: If a function passed to a `CappedPromise` method throws right away,
+e.g. `() => { throw new Error("Oops!"); }` then this is treated as an unintended catastrophic failure and is propagated
+as a rejection immediately, **even if** the function was passed to `allSettled`. If this is not what you expect, you
+should return a rejecting `Promise`, as follows: `() => Promise.reject(new Error("Oops!"))`.
