@@ -1,7 +1,6 @@
-<h1 align="center">
+<p align="center">
   <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true">
-</h1>
-<h1 align="center">Capped Promise</h1>
+</p>
 <p align="center">
   <a href="https://www.npmjs.com/package/capped-promise">
     <img src="https://img.shields.io/npm/v/capped-promise" alt="NPM Version">
@@ -28,6 +27,8 @@
     <img src="https://img.shields.io/github/license/andreashuber69/capped-promise.svg" alt="License">
   </a>
 </p>
+
+<h1 align="center">Capped Promise</h1>
 
 Provides replacements for `Promise.all` and `Promise.allSettled` that allow to cap the number of simultaneously pending
 promises. This is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it
