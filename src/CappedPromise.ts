@@ -1,8 +1,24 @@
-// https://github.com/andreashuber69/capped-promise/blob/develop/README.md#--
+// https://github.com/andreashuber69/capped-promise/blob/develop/README.md#----capped-promise
+/**
+ * Provides replacements for {@link Promise.all} and {@link Promise.allSettled} that limit the number of awaitables that
+ * can simultaneously be pending.
+ */
 export = class CappedPromise {
+    /**
+     * Creates a {@link Promise} that is fulfilled with an array of results when all of the awaitables created by the
+     * provided functions fulfill, or rejected when any of the created awaitables rejects.
+     * @description Initially, the functions are called in the passed order to create at most `maxPending` awaitables.
+     * Then, whenever one of those awaitables fulfills, the next function is called to bring the number of currently
+     * pending awaitables back to `maxPending`. This process is repeated until no more functions are available, a
+     * function throws or an awaitable rejects.
+     * @param maxPending The maximum number of awaitables that are allowed to be pending simultaneously.
+     * @param createAwaitableIterable An iterable of parameterless functions that create and return an awaitable.
+     * @throws A {@link RangeError} when `maxPending` has either the wrong type or is smaller than 1.
+     * @throws A {@link TypeError} when any value in `createAwaitableIterable` is not a function.
+     */
     public static async all<T extends ReadonlyArray<() => unknown>>(
         maxPending: number,
-        createAwaitableArray: T,
+        createAwaitableIterable: T,
     ): Promise<{ -readonly [P in keyof T]: Awaited<ReturnType<T[P]>> }>;
     public static async all<T>(
         maxPending: number,
@@ -17,9 +33,24 @@ export = class CappedPromise {
         return results.map((r) => (r.status === "fulfilled" ? r.value : undefined));
     }
 
+    /**
+     * Creates a {@link Promise} that is fulfilled with an array of results when all of the awaitables created by the
+     * provided functions settle (fulfill or reject).
+     * @description Initially, the functions are called in the passed order to create at most `maxPending` awaitables.
+     * Then, whenever one of those awaitables settles, the next function is called to bring the number of currently
+     * pending awaitables back to `maxPending`. This process is repeated until no more functions are available.
+     * **Note**: If an argument violates a precondition (see below) then this is treated as an unintended catastrophic
+     * failure and is propagated as a rejection immediately. The same is true if a provided function throws right away,
+     * e.g. `() => { throw new Error("Oops!"); }`. If this is not what you expect, you should return a rejecting
+     * {@link Promise}, as follows: `() => Promise.reject(new Error("Oops!"))`.
+     * @param maxPending The maximum number of awaitables that are allowed to be pending simultaneously.
+     * @param createAwaitableIterable An iterable of parameterless functions that create and return an awaitable.
+     * @throws A {@link RangeError} when `maxPending` has either the wrong type or is smaller than 1.
+     * @throws A {@link TypeError} when any value in `createAwaitableIterable` is not a function.
+     */
     public static async allSettled<T extends ReadonlyArray<() => unknown>>(
         maxPending: number,
-        createAwaitableArray: T,
+        createAwaitableIterable: T,
     ): Promise<{ -readonly [P in keyof T]: PromiseSettledResult<Awaited<ReturnType<T[P]>>> }>;
     public static async allSettled<T>(
         maxPending: number,
@@ -32,6 +63,10 @@ export = class CappedPromise {
         return await this.#all(maxPending, false, createAwaitableIterable);
     }
 
+    /**
+     * Objects of this class do not serve any purpose.
+     * @deprecated
+     */
     private constructor() {}
 
     static async #all(
