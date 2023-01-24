@@ -1,6 +1,6 @@
 {
   "name": "capped-promise",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Promise.all replacement that caps the number of simultaneously pending promises.",
   "keywords": [
     "Promise",
