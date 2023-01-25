@@ -1,7 +1,7 @@
 {
   "name": "capped-promise",
   "version": "1.0.1",
-  "description": "Promise.all replacement that caps the number of simultaneously pending promises.",
+  "description": "Provides Promise.all and Promise.allSettled variants that limit the number of simultaneously pending promises.",
   "keywords": [
     "Promise",
     "Promise.all",
@@ -9,7 +9,7 @@
     "limited",
     "capped"
   ],
-  "homepage": "https://github.com/andreashuber69/capped-promise/blob/master/README.md#--",
+  "homepage": "https://github.com/andreashuber69/capped-promise/blob/develop/README.md#----capped-promise",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andreashuber69/capped-promise.git"

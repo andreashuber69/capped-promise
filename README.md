@@ -24,12 +24,12 @@
   <a href="https://codeclimate.com/github/andreashuber69/capped-promise/test_coverage">
     <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/test_coverage" alt="Code Climate Test Coverage">
   </a>
-  <a href="https://github.com/andreashuber69/capped-promise/blob/master/LICENSE">
+  <a href="https://github.com/andreashuber69/capped-promise/blob/develop/LICENSE">
     <img src="https://img.shields.io/github/license/andreashuber69/capped-promise.svg" alt="License">
   </a>
 </p>
 
-Provides replacements for `Promise.all` and `Promise.allSettled` that allow to cap the number of simultaneously pending
+Provides `Promise.all` and `Promise.allSettled` variants that allow to cap the number of simultaneously pending
 promises. This is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it
 with all requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one
 settles, the next one is initiated automatically.
