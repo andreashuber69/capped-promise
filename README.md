@@ -21,6 +21,9 @@
   <a href="https://codeclimate.com/github/andreashuber69/capped-promise/test_coverage">
     <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/test_coverage" alt="Code Climate Test Coverage">
   </a>
+  <a href="https://coveralls.io/github/andreashuber69/capped-promise?branch=develop">
+    <img src="https://coveralls.io/repos/github/andreashuber69/capped-promise/badge.svg?branch=develop" alt="Coveralls">
+  </a>
   <a href="https://github.com/andreashuber69/capped-promise/blob/develop/LICENSE">
     <img src="https://img.shields.io/github/license/andreashuber69/capped-promise.svg" alt="License">
   </a>
