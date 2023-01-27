@@ -15,9 +15,6 @@
   <a href="https://github.com/andreashuber69/capped-promise/issues">
     <img src="https://img.shields.io/github/issues-raw/andreashuber69/capped-promise.svg" alt="Issues">
   </a>
-  <a href="https://codebeat.co/projects/github-com-andreashuber69-capped-promise-develop">
-    <img src="https://codebeat.co/badges/fd40f089-dc96-44ab-b45b-7f12f0936bee" alt="Codebeat Score">
-  </a>
   <a href="https://codeclimate.com/github/andreashuber69/capped-promise/maintainability">
     <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/maintainability" alt="Code Climate Maintainability">
   </a>

@@ -51,7 +51,6 @@
     "c8": "^7.12.0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
-    "codeclimate-test-reporter": "^0.5.1",
     "cspell": "^6.19.2",
     "lite-server": "^2.6.1",
     "markdownlint-cli": "^0.33.0",
