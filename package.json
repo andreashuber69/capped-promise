@@ -37,7 +37,7 @@
     "prebuild": "npm run lint",
     "build": "tsc",
     "test-no-coverage": "ts-mocha './src/**/*.spec.ts'",
-    "test": "c8 --include 'src/*.ts' --reporter=text --reporter=lcov --all npm run test-no-coverage",
+    "test": "c8 --include 'src/CappedPromise.ts' --reporter=text --reporter=lcov --all npm run test-no-coverage",
     "show-coverage": "alive-server 'coverage/lcov-report'",
     "preci": "npm run build",
     "ci": "npm run test"
