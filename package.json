@@ -41,7 +41,7 @@
     "test": "c8 --include 'src/CappedPromise.ts' --reporter=text --reporter=lcov --all npm run test-no-coverage",
     "show-coverage": "alive-server 'coverage/lcov-report'",
     "preci": "npm run build",
-    "ci": "npm run test"
+    "ci": "npm test"
   },
   "devDependencies": {
     "@andreashuber69/eslint-config": "^1.1.4",
