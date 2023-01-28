@@ -26,10 +26,10 @@
   </a>
 </p>
 
-Provides `Promise.all` and `Promise.allSettled` variants that allow to cap the number of simultaneously pending
-promises. This is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it
-with all requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one
-settles, the next one is initiated automatically.
+Provides `Promise.all` and `Promise.allSettled` variants that limit the number of simultaneously pending promises. This
+is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it with all
+requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one settles,
+the next one is initiated automatically.
 
 This is a ES2019 CommonJS module, that works exactly the same way in CommonJS and ES modules (because there's only an
 unnamed default export). TypeScript typings are provided.
