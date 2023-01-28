@@ -29,7 +29,8 @@
   "files": [
     "/dist/",
     "!/dist/*.map",
-    "!/dist/*.spec.*"
+    "!/dist/*.spec.*",
+    "/*.md"
   ],
   "scripts": {
     "prelint": "cspell '**/*.*' && markdownlint '*.md'",
