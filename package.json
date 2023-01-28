@@ -1,15 +1,16 @@
 {
   "name": "capped-promise",
-  "version": "1.0.1",
-  "description": "Promise.all replacement that caps the number of simultaneously pending promises.",
+  "version": "1.0.2",
+  "description": "Provides Promise.all and Promise.allSettled variants that limit the number of simultaneously pending promises.",
   "keywords": [
-    "Promise",
-    "Promise.all",
-    "Promise.allSettled",
+    "all",
+    "allsettled",
+    "capped",
     "limited",
-    "capped"
+    "promise",
+    "typescript"
   ],
-  "homepage": "https://github.com/andreashuber69/capped-promise/blob/master/README.md#--",
+  "homepage": "https://github.com/andreashuber69/capped-promise/blob/develop/README.md#----capped-promise",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andreashuber69/capped-promise.git"
@@ -36,24 +37,24 @@
     "prebuild": "npm run lint",
     "build": "tsc",
     "test-no-coverage": "ts-mocha './src/**/*.spec.ts'",
-    "test": "c8 --include 'src/*.ts' --reporter=text --reporter=lcov --all npm run test-no-coverage",
-    "show-coverage": "lite-server --baseDir='coverage/lcov-report'",
+    "test": "c8 --include 'src/CappedPromise.ts' --reporter=text --reporter=lcov --all npm run test-no-coverage",
+    "show-coverage": "alive-server 'coverage/lcov-report'",
     "preci": "npm run build",
     "ci": "npm run test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.2",
+    "@andreashuber69/eslint-config": "^1.1.4",
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/chai": "^4.3.4",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^10.0.1",
     "@types/node-fetch": "^2.6.2",
+    "alive-server": "^1.2.9",
     "c8": "^7.12.0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
-    "codeclimate-test-reporter": "^0.5.1",
+    "coveralls": "^3.1.1",
     "cspell": "^6.19.2",
-    "lite-server": "^2.6.1",
     "markdownlint-cli": "^0.33.0",
     "node-fetch": "^2.6.8",
     "ts-mocha": "^10.0.0",

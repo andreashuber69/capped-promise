@@ -15,24 +15,21 @@
   <a href="https://github.com/andreashuber69/capped-promise/issues">
     <img src="https://img.shields.io/github/issues-raw/andreashuber69/capped-promise.svg" alt="Issues">
   </a>
-  <a href="https://codebeat.co/projects/github-com-andreashuber69-capped-promise-develop">
-    <img src="https://codebeat.co/badges/fd40f089-dc96-44ab-b45b-7f12f0936bee" alt="Codebeat Score">
-  </a>
   <a href="https://codeclimate.com/github/andreashuber69/capped-promise/maintainability">
     <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/maintainability" alt="Code Climate Maintainability">
   </a>
-  <a href="https://codeclimate.com/github/andreashuber69/capped-promise/test_coverage">
-    <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/test_coverage" alt="Code Climate Test Coverage">
+  <a href="https://coveralls.io/github/andreashuber69/capped-promise?branch=develop">
+    <img src="https://coveralls.io/repos/github/andreashuber69/capped-promise/badge.svg?branch=develop" alt="Coveralls">
   </a>
-  <a href="https://github.com/andreashuber69/capped-promise/blob/master/LICENSE">
+  <a href="https://github.com/andreashuber69/capped-promise/blob/develop/LICENSE">
     <img src="https://img.shields.io/github/license/andreashuber69/capped-promise.svg" alt="License">
   </a>
 </p>
 
-Provides replacements for `Promise.all` and `Promise.allSettled` that allow to cap the number of simultaneously pending
-promises. This is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it
-with all requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one
-settles, the next one is initiated automatically.
+Provides `Promise.all` and `Promise.allSettled` variants that limit the number of simultaneously pending promises. This
+is useful e.g. when you need to make thousands of requests to a single server but do not want to hit it with all
+requests at once. Instead you might want to have at most 10 requests pending simultaneously and whenever one settles,
+the next one is initiated automatically.
 
 This is a ES2019 CommonJS module, that works exactly the same way in CommonJS and ES modules (because there's only an
 unnamed default export). TypeScript typings are provided.
