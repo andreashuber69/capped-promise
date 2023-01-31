@@ -28,17 +28,17 @@
   "main": "dist/CappedPromise.js",
   "files": [
     "/dist/",
-    "!/dist/*.map",
-    "!/dist/*.spec.*",
+    "!/**/*.spec.*",
+    "!/**/*.map",
     "/*.md"
   ],
   "scripts": {
-    "prelint": "cspell '**/*.*' && markdownlint '*.md'",
-    "lint": "eslint --ext .js,.ts --report-unused-disable-directives './src'",
+    "prelint": "cspell '**' && markdownlint '**/*.md'",
+    "lint": "eslint --report-unused-disable-directives 'src/**'",
     "prebuild": "npm run lint",
     "build": "tsc",
-    "test-no-coverage": "ts-mocha './src/**/*.spec.ts'",
-    "test": "c8 --include 'src/CappedPromise.ts' --reporter=text --reporter=lcov --all npm run test-no-coverage",
+    "test-no-coverage": "ts-mocha 'src/**/*.spec.ts'",
+    "test": "c8 --exclude 'src/**/*.spec.ts' --reporter=text --reporter=lcov npm run test-no-coverage",
     "show-coverage": "alive-server 'coverage/lcov-report'",
     "preci": "npm run build",
     "ci": "npm test"
