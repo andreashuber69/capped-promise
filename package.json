@@ -44,7 +44,7 @@
     "ci": "npm test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.4",
+    "@andreashuber69/eslint-config": "^1.1.5",
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/chai": "^4.3.4",
     "@types/chai-as-promised": "^7.1.5",
@@ -57,8 +57,8 @@
     "coveralls": "^3.1.1",
     "cspell": "^6.19.2",
     "markdownlint-cli": "^0.33.0",
-    "node-fetch": "^2.6.8",
+    "node-fetch": "^2.6.9",
     "ts-mocha": "^10.0.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
