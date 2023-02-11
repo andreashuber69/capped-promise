@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/capped-promise">
     <img src="https://img.shields.io/npm/v/capped-promise" alt="NPM Version">
   </a>
-  <a href="https://github.com/andreashuber69/capped-promise/releases/latest">
+  <a href="https://github.com/andreashuber69/capped-promise/releases">
     <img src="https://img.shields.io/github/release-date/andreashuber69/capped-promise.svg" alt="Release Date">
   </a>
   <a href="https://travis-ci.com/github/andreashuber69/capped-promise">
@@ -16,10 +16,10 @@
     <img src="https://img.shields.io/github/issues-raw/andreashuber69/capped-promise.svg" alt="Issues">
   </a>
   <a href="https://codeclimate.com/github/andreashuber69/capped-promise/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/maintainability" alt="Code Climate Maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/10eb936245c62547a163/maintainability" alt="Maintainability">
   </a>
   <a href="https://coveralls.io/github/andreashuber69/capped-promise?branch=develop">
-    <img src="https://coveralls.io/repos/github/andreashuber69/capped-promise/badge.svg?branch=develop" alt="Coveralls">
+    <img src="https://coveralls.io/repos/github/andreashuber69/capped-promise/badge.svg?branch=develop" alt="Coverage">
   </a>
   <a href="https://github.com/andreashuber69/capped-promise/blob/develop/LICENSE">
     <img src="https://img.shields.io/github/license/andreashuber69/capped-promise.svg" alt="License">

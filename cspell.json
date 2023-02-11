@@ -1,18 +1,17 @@
 {
   "version": "0.2",
-  "language": "en",
   "words": [
-    "codebeat",
+    "Andreas",
     "parameterless"
   ],
-  "flagWords": [],
   "dictionaries": [
+    "bash",
     "typescript"
   ],
   "ignorePaths": [
-    "**/*.svg",
-    "coverage/**",
-    "dist/**",
-    "package.json"
+    "/cc-test-reporter",
+    "/coverage/**",
+    "/dist/**",
+    "/package.json"
   ]
 }
