@@ -44,21 +44,21 @@
     "ci": "npm test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.11",
+    "@andreashuber69/eslint-config": "^1.1.15",
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/chai": "^4.3.4",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^10.0.1",
-    "@types/node-fetch": "^2.6.2",
+    "@types/node-fetch": "^2.6.3",
     "alive-server": "^1.2.9",
     "c8": "^7.13.0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.1.1",
-    "cspell": "^6.28.0",
+    "cspell": "^6.31.1",
     "markdownlint-cli": "^0.33.0",
     "node-fetch": "^2.6.9",
     "ts-mocha": "^10.0.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.4"
   }
 }
