@@ -44,7 +44,7 @@
     "ci": "npm test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.19",
+    "@andreashuber69/eslint-config": "^1.1.20",
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.5",
