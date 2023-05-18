@@ -44,12 +44,12 @@
     "ci": "npm test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.21",
+    "@andreashuber69/eslint-config": "^1.1.22",
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^10.0.1",
-    "@types/node-fetch": "^2.6.3",
+    "@types/node-fetch": "^2.6.4",
     "alive-server": "^1.2.9",
     "c8": "^7.13.0",
     "chai": "^4.3.7",
