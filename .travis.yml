@@ -1,9 +1,9 @@
 # https://github.com/andreashuber69/capped-promise/blob/develop/README.md#----capped-promise
 os: linux
-dist: xenial
+dist: focal
 language: node_js
 node_js:
-- 16
+- lts/*
 
 branches:
   only:
