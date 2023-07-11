@@ -13,6 +13,8 @@
     // https://www.npmjs.com/package/@tsconfig/node-lts-strictest?activeTab=code with
     // https://www.npmjs.com/package/@tsconfig/node12?activeTab=code
     "lib": ["es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
+    // The base erroneously sets "node", see https://github.com/tsconfig/bases/issues/204
+    "moduleResolution": "node16",
     "outDir": "dist",
     "sourceMap": true,
     "target": "es2019"
