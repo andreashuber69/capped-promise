@@ -63,12 +63,6 @@ export = class CappedPromise {
         return await this.#all(maxPending, false, createAwaitableIterable);
     }
 
-    /**
-     * Objects of this class do not serve any purpose.
-     * @deprecated
-     */
-    private constructor() {}
-
     static async #all(
         maxPending: number,
         propagateRejections: boolean,
@@ -133,4 +127,10 @@ export = class CappedPromise {
             return { status: "rejected", reason: error };
         }
     }
+
+    /**
+     * Objects of this class do not serve any purpose.
+     * @deprecated
+     */
+    private constructor() {}
 };
