@@ -3,6 +3,7 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import fetch from "node-fetch";
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 import CappedPromise from "./CappedPromise";
 
 const iterable = function *iterable() {
@@ -15,9 +16,9 @@ const delay = async <T>(delayMilliseconds: number, result: T) =>
 
 type State = "init" | "pending" | "settled";
 
-describe("CappedPromise", () => {
-    describe("all", () => {
-        it("should correctly infer the types for tuples", async () => {
+describe("CappedPromise", async () => {
+    await describe("all", async () => {
+        await it("should correctly infer the types for tuples", async () => {
             const argument = [
                 async () => await Promise.resolve(1),
                 async () => await Promise.resolve("hello"),
@@ -29,14 +30,14 @@ describe("CappedPromise", () => {
             assert(result1 === "hello");
         });
 
-        it("should correctly infer the types for iterables", async () => {
+        await it("should correctly infer the types for iterables", async () => {
             const [result0, result1]: number[] = await CappedPromise.all(5, iterable());
 
             assert(result0 === 1);
             assert(result1 === 2);
         });
 
-        it("should only create new awaitables when all previous ones are pending or settled", async () => {
+        await it("should only create new awaitables when all previous ones are pending or settled", async () => {
             const states = new Array<State>(5).fill("init");
 
             const argument = states.map((_, index, array) => (
@@ -64,11 +65,11 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should fulfill with empty array if passed empty array", async () => {
+        await it("should fulfill with empty array if passed empty array", async () => {
             assert((await CappedPromise.all(5, [])).length === 0);
         });
 
-        it("should add results in the awaitable creation order", async () => {
+        await it("should add results in the awaitable creation order", async () => {
             const argument = [
                 async () => await delay(300, 0),
                 async () => await delay(200, 1),
@@ -82,7 +83,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should work with example code", async () => {
+        await it("should work with example code", async () => {
             /* eslint-disable @typescript-eslint/promise-function-async */
             // eslint-disable-next-line unicorn/consistent-function-scoping
             const getText = async (url: string) => {
@@ -124,7 +125,7 @@ describe("CappedPromise", () => {
             /* eslint-enable @typescript-eslint/promise-function-async */
         });
 
-        it("should reject for invalid maxPending", async () => {
+        await it("should reject for invalid maxPending", async () => {
             try {
                 await CappedPromise.all(0, []);
             } catch (error) {
@@ -133,7 +134,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should reject for non-functions", async () => {
+        await it("should reject for non-functions", async () => {
             try {
                 await CappedPromise.all(5, [42 as unknown as () => Promise<number>]);
             } catch (error) {
@@ -142,7 +143,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("with maxPending 1, should not create next awaitable when first rejects", async () => {
+        await it("with maxPending 1, should not create next awaitable when first rejects", async () => {
             const argument = [
                 async () => await Promise.reject(new Error("Boom!")),
                 () => { throw new Error("This should not happen..."); },
@@ -156,7 +157,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("with maxPending 2, should attempt to create both awaitables", async () => {
+        await it("with maxPending 2, should attempt to create both awaitables", async () => {
             const argument = [
                 async () => await Promise.reject(new Error("This should not happen...")),
                 () => { throw new Error("Boom!"); },
@@ -171,8 +172,8 @@ describe("CappedPromise", () => {
         });
     });
 
-    describe("allSettled", () => {
-        it("should correctly infer the types for tuples", async () => {
+    await describe("allSettled", async () => {
+        await it("should correctly infer the types for tuples", async () => {
             const argument = [
                 async () => await Promise.resolve(1),
                 async () => await Promise.resolve("hello"),
@@ -185,7 +186,7 @@ describe("CappedPromise", () => {
             assert((result1.status === "fulfilled" ? result1.value : undefined) === "hello");
         });
 
-        it("should correctly infer the types for iterables", async () => {
+        await it("should correctly infer the types for iterables", async () => {
             const [result0, result1]: Array<PromiseSettledResult<number>> =
                 await CappedPromise.allSettled(5, iterable());
 
@@ -193,7 +194,7 @@ describe("CappedPromise", () => {
             assert((result1?.status === "fulfilled" ? result1.value : undefined) === 2);
         });
 
-        it("should only create new awaitables when all previous ones are pending or settled", async () => {
+        await it("should only create new awaitables when all previous ones are pending or settled", async () => {
             const states = new Array<State>(5).fill("init");
 
             const argument = states.map((_, index, array) => (
@@ -221,11 +222,11 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should fulfill with empty array if passed empty array", async () => {
+        await it("should fulfill with empty array if passed empty array", async () => {
             assert((await CappedPromise.allSettled(5, [])).length === 0);
         });
 
-        it("results should be added in the awaitable creation order", async () => {
+        await it("results should be added in the awaitable creation order", async () => {
             const argument = [
                 async () => await delay(300, 0),
                 async () => await delay(200, 1),
@@ -239,7 +240,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should reject for invalid maxPending", async () => {
+        await it("should reject for invalid maxPending", async () => {
             try {
                 await CappedPromise.allSettled(0, []);
             } catch (error) {
@@ -248,7 +249,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("should reject for non-functions", async () => {
+        await it("should reject for non-functions", async () => {
             const createAwaitable = 42 as unknown as () => Promise<number>;
 
             try {
@@ -259,7 +260,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("with maxPending 1, should reject with error thrown by second createAwaitable", async () => {
+        await it("with maxPending 1, should reject with error thrown by second createAwaitable", async () => {
             const argument = [
                 async () => await Promise.reject(new Error("This should not happen...")),
                 () => { throw new Error("Boom!"); },
@@ -273,7 +274,7 @@ describe("CappedPromise", () => {
             }
         });
 
-        it("with maxPending 2, should reject with error thrown from first createAwaitable", async () => {
+        await it("with maxPending 2, should reject with error thrown from first createAwaitable", async () => {
             const argument = [
                 () => { throw new Error("Boom!"); },
                 async () => await Promise.reject(new Error("This should not happen...")),
@@ -287,4 +288,7 @@ describe("CappedPromise", () => {
             }
         });
     });
-});
+// This is a CommonJS module, where top-level await is not available. Compiling tests differently is possible but not
+// worth the effort.
+// eslint-disable-next-line unicorn/prefer-top-level-await
+}).catch((error) => console.error(error));
