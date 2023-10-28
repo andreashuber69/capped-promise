@@ -3,7 +3,6 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import fetch from "node-fetch";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 import CappedPromise from "./CappedPromise";
 
 const iterable = function *iterable() {
