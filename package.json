@@ -44,7 +44,7 @@
     "ci": "npm test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.80",
+    "@andreashuber69/eslint-config": "^1.1.81",
     "@tsconfig/node12": "^12.1.0",
     "@tsconfig/strictest": "^2.0.2",
     "@types/node-fetch": "^2.6.10",
