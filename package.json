@@ -44,17 +44,17 @@
     "ci": "npm test"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.84",
+    "@andreashuber69/eslint-config": "^1.1.89",
     "@tsconfig/node12": "^12.1.0",
-    "@tsconfig/strictest": "^2.0.2",
+    "@tsconfig/strictest": "^2.0.3",
     "@types/node-fetch": "^2.6.11",
     "c8": "^9.1.0",
     "coveralls": "^3.1.1",
-    "cspell": "^8.3.2",
+    "cspell": "^8.4.1",
     "markdownlint-cli": "^0.39.0",
     "node-fetch": "^2.7.0",
-    "tsx": "^4.7.0",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "vite": "^5.1.4"
   }
 }
