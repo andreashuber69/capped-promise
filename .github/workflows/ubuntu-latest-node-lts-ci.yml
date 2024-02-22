@@ -29,14 +29,14 @@ jobs:
     - name: Build
       run: npm run ci
     - name: Upload coverage
+      env:
+        COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN}}
       run: |
         ./cc-test-reporter format-coverage --input-type lcov ./coverage/lcov.info
         ./cc-test-reporter upload-coverage --id ${{secrets.CODECLIMATE_TEST_REPORTER_ID}}
         npx coveralls <./coverage/lcov.info
-      env:
-        COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN}}
     - name: Publish to npmjs.org
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
-      if: ${{env.NODE_AUTH_TOKEN}} != '' && github.ref == 'refs/heads/master'
+      if: ${{env.NODE_AUTH_TOKEN}} != null && github.ref == 'refs/heads/master'
       run: npm publish
