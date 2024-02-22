@@ -8,7 +8,7 @@ on:
       COVERALLS_REPO_TOKEN:
         required: true
       NPM_ACCESS_TOKEN:
-        default: ""
+        required: false
 
 jobs:
   ubuntu-latest-node-lts-ci:
@@ -36,7 +36,7 @@ jobs:
       env:
         COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN}}
     - name: Publish to npmjs.org
-      if: ${{secrets.NPM_ACCESS_TOKEN}} != "" && github.ref == 'refs/heads/master'
+      if: ${{secrets.NPM_ACCESS_TOKEN}} != '' && github.ref == 'refs/heads/master'
       run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
