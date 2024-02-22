@@ -4,35 +4,8 @@ on:
   push:
     branches:
     - "**"
-  workflow_call:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-        registry-url: https://registry.npmjs.org/
-    - name: Install dependencies
-      run: npm ci
-    - name: Prepare code coverage reporter
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
-    - name: Build
-      run: npm run ci
-    - name: Upload coverage
-      run: |
-        ./cc-test-reporter format-coverage --input-type lcov ./coverage/lcov.info
-        ./cc-test-reporter upload-coverage --id ${{secrets.CODECLIMATE_TEST_REPORTER_ID}}
-        npx coveralls <./coverage/lcov.info
-      env:
-        COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN}}
-    - name: Publish to npmjs.org
-      if: github.ref == 'refs/heads/master'
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    uses: ./.github/workflows/ubuntu-latest-node-lts-ci.yml
+    secrets: inherit
