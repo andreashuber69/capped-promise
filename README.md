@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/github/release-date/andreashuber69/capped-promise.svg" alt="Release Date">
   </a>
   <a href="https://github.com/andreashuber69/capped-promise/actions/workflows/ci.yml">
-    <img src="https://github.com/andreashuber69/capped-promise/actions/workflows/ci.yml/badge.svg" alt="Build">
+    <img src="https://github.com/andreashuber69/capped-promise/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
   <a href="https://github.com/andreashuber69/capped-promise/issues">
     <img src="https://img.shields.io/github/issues-raw/andreashuber69/capped-promise.svg" alt="Issues">
