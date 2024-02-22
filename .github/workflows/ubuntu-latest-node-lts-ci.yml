@@ -38,5 +38,5 @@ jobs:
     - name: Publish to npmjs.org
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
-      if: ${{env.NODE_AUTH_TOKEN}} != null && github.ref == 'refs/heads/master'
+      if: ${{env.NODE_AUTH_TOKEN != ''}} && github.ref == 'refs/heads/master'
       run: npm publish
