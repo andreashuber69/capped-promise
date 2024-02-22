@@ -7,5 +7,5 @@ on:
 
 jobs:
   ci:
-    uses: andreashuber69/actions/.github/workflows/ubuntu-latest-node-lts-ci.yml
+    uses: andreashuber69/actions/.github/workflows/ubuntu-latest-node-lts-ci.yml@master
     secrets: inherit
