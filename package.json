@@ -1,6 +1,6 @@
 {
   "name": "capped-promise",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Provides Promise.all and Promise.allSettled variants that limit the number of simultaneously pending promises.",
   "keywords": [
     "all",
