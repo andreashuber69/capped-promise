@@ -1,5 +1,7 @@
 <h1 align="center">
-  <img width="128" src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true"><br>
+  <img
+    width="128" alt="logo"
+    src="https://raw.githubusercontent.com/andreashuber69/capped-promise/develop/doc/icon.svg?sanitize=true"><br>
   capped-promise
 </h1>
 <p align="center">
@@ -9,8 +11,8 @@
   <a href="https://github.com/andreashuber69/capped-promise/releases">
     <img src="https://img.shields.io/github/release-date/andreashuber69/capped-promise.svg" alt="Release Date">
   </a>
-  <a href="https://travis-ci.com/github/andreashuber69/capped-promise">
-    <img src="https://travis-ci.com/andreashuber69/capped-promise.svg?branch=master" alt="Build">
+  <a href="https://github.com/andreashuber69/capped-promise/actions/workflows/ci.yml">
+    <img src="https://github.com/andreashuber69/capped-promise/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
   <a href="https://github.com/andreashuber69/capped-promise/issues">
     <img src="https://img.shields.io/github/issues-raw/andreashuber69/capped-promise.svg" alt="Issues">
