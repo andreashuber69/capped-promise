@@ -48,7 +48,7 @@
     "finish-release": "git flow release finish -p -m \"Finish release\" v`cat package.json | jq -r '.version'`"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.90",
+    "@andreashuber69/eslint-config": "^1.1.92",
     "@tsconfig/node12": "^12.1.1",
     "@tsconfig/strictest": "^2.0.3",
     "@types/node-fetch": "^2.6.11",
