@@ -48,17 +48,17 @@
     "finish-release": "git flow release finish -p -m \"Finish release\" v`cat package.json | jq -r '.version'`"
   },
   "devDependencies": {
-    "@andreashuber69/eslint-config": "^1.1.92",
+    "@andreashuber69/eslint-config": "^1.1.94",
     "@tsconfig/node12": "^12.1.1",
     "@tsconfig/strictest": "^2.0.3",
     "@types/node-fetch": "^2.6.11",
     "c8": "^9.1.0",
     "coveralls": "^3.1.1",
-    "cspell": "^8.4.1",
+    "cspell": "^8.6.0",
     "markdownlint-cli": "^0.39.0",
     "node-fetch": "^2.7.0",
     "tsx": "^4.7.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4"
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5"
   }
 }
