@@ -7,7 +7,7 @@
     "noEmit": true
   },
   "include": [
-    ".eslintrc.cjs",
+    "./.eslintrc.cjs",
     "./*.ts"
   ]
 }
