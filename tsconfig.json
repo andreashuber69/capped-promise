@@ -4,11 +4,10 @@
     "@tsconfig/node12/tsconfig"
   ],
   "compilerOptions": {
-    "declaration": true,
-    "outDir": "dist",
-    "sourceMap": true
+    "noEmit": true
   },
   "include": [
-    "src/**/*"
+    ".eslintrc.cjs",
+    "./*.ts"
   ]
 }
