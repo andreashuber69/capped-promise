@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "prelint": "cspell '**' && markdownlint '**/*.md'",
-    "lint": "eslint --ext .js,.ts --report-unused-disable-directives .",
+    "lint": "eslint --ext .cjs,.ts --report-unused-disable-directives '.'",
     "prebuild": "npm run lint",
     "build": "tsc -p ./src/tsconfig.json",
     "test-no-coverage": "node --import tsx --test src/*.spec.ts",
