@@ -290,4 +290,4 @@ describe("CappedPromise", async () => {
 // This is a CommonJS module, where top-level await is not available. Compiling tests differently is possible but not
 // worth the effort.
 // eslint-disable-next-line unicorn/prefer-top-level-await
-}).catch((error) => console.error(error));
+}).catch((error: unknown) => console.error(error));
