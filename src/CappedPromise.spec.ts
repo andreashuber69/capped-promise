@@ -44,7 +44,7 @@ describe("CappedPromise", async () => {
                     // Previous awaitables must be pending or settled
                     assert(array.findIndex((state) => state !== "pending" && state !== "settled") === index);
                     // Next awaitables must be in initial state
-                    assert(array.slice(index).findIndex((state) => state !== "init") === -1);
+                    assert(!array.slice(index).some((state) => state !== "init"));
                     const promise = Promise.resolve(index);
                     array[index] = "pending";
 
@@ -201,7 +201,7 @@ describe("CappedPromise", async () => {
                     // Previous awaitables must be pending or settled
                     assert(array.findIndex((state) => state !== "pending" && state !== "settled") === index);
                     // Next awaitables must be in initial state
-                    assert(array.slice(index).findIndex((state) => state !== "init") === -1);
+                    assert(!array.slice(index).some((state) => state !== "init"));
                     const promise = Promise.resolve(index);
                     array[index] = "pending";
 
