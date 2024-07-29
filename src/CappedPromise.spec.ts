@@ -1,4 +1,5 @@
 // https://github.com/andreashuber69/capped-promise/blob/develop/README.md#----capped-promise
+
 import assert from "node:assert";
 import { describe, it } from "node:test";
 import fetch from "node-fetch";

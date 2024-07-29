@@ -1,4 +1,5 @@
 // https://github.com/andreashuber69/capped-promise/blob/develop/README.md#----capped-promise
+
 /**
  * Provides replacements for {@link Promise.all} and {@link Promise.allSettled} that limit the number of awaitables that
  * can simultaneously be pending.
