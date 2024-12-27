@@ -136,6 +136,7 @@ describe("CappedPromise", async () => {
 
         await it("should reject for non-functions", async () => {
             try {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                 await CappedPromise.all(5, [42 as unknown as () => Promise<number>]);
             } catch (error) {
                 assert(error instanceof TypeError);
@@ -250,6 +251,7 @@ describe("CappedPromise", async () => {
         });
 
         await it("should reject for non-functions", async () => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
             const createAwaitable = 42 as unknown as () => Promise<number>;
 
             try {
