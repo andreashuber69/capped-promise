@@ -1,14 +1,8 @@
 {
-  "cSpell.enabledLanguageIds": [
-    "json",
-    "jsonc",
-    "markdown",
-    "plaintext",
-    "shellscript",
-    "typescript",
-    "yaml"
-  ],
-  "cSpell.import": ["../cspell.json"],
+  "cSpell.enabledFileTypes": {
+    "*": true
+  },
+  "cSpell.import": ["cspell.json"],
   "files.autoSave": "onFocusChange",
   "editor.rulers": [120],
   "git.confirmSync": false,
