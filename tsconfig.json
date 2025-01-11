@@ -5,10 +5,8 @@
   ],
   "compilerOptions": {
     "declaration": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "sourceMap": true
   },
-  "include": [
-    "./src/*.ts"
-  ]
+  "include": ["src/*.ts"]
 }
