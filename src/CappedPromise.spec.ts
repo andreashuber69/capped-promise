@@ -4,7 +4,7 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import fetch from "node-fetch";
 
-import CappedPromise from "./CappedPromise";
+import CappedPromise from "./CappedPromise.js";
 
 const iterable = function *iterable() {
     yield async () => await Promise.resolve(1);
