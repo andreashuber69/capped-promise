@@ -1,11 +1,9 @@
-import generalConfig from "@andreashuber69/eslint-config";
+import config from "@andreashuber69/eslint-config";
 
-const config = [
-    ...generalConfig,
+// eslint-disable-next-line import/no-anonymous-default-export, import/no-default-export
+export default [
+    ...config,
     {
         ignores: ["coverage/", "dist/"],
     },
 ];
-
-// eslint-disable-next-line import/no-default-export
-export default config;
