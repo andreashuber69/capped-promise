@@ -3,7 +3,7 @@
 import fetch from "node-fetch";
 import { describe, expect, it } from "vitest";
 
-import CappedPromise from "./CappedPromise.js";
+import CappedPromise from "./CappedPromise.ts";
 
 const iterable = function *iterable() {
     yield async () => await Promise.resolve(1);

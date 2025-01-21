@@ -4,7 +4,8 @@
  * Provides replacements for {@link Promise.all} and {@link Promise.allSettled} that limit the number of awaitables that
  * can simultaneously be pending.
  */
-export = class CappedPromise {
+// eslint-disable-next-line import/no-default-export
+export default class CappedPromise {
     /**
      * Creates a {@link Promise} that is fulfilled with an array of results when all of the awaitables created by the
      * provided functions fulfill, or rejected when any of the created awaitables rejects.
@@ -134,4 +135,4 @@ export = class CappedPromise {
      * @deprecated
      */
     private constructor() {}
-};
+}

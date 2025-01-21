@@ -4,9 +4,8 @@
     "@tsconfig/node12/tsconfig"
   ],
   "compilerOptions": {
-    "declaration": true,
-    "outDir": "dist",
-    "sourceMap": true
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   },
-  "include": ["src/*.ts"]
+  "include": ["src/*"]
 }
