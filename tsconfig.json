@@ -1,11 +1,9 @@
 {
-  "extends": [
-    "@tsconfig/strictest/tsconfig",
-    "@tsconfig/node12/tsconfig"
-  ],
+  "extends": ["@tsconfig/strictest/tsconfig"],
   "compilerOptions": {
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "module": "Node16",
+    "noEmit": true,
   },
-  "include": ["src/*"]
+  "include": ["src/**/*"]
 }

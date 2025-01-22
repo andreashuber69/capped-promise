@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@andreashuber69/eslint-config": "^2.1.1",
-    "@tsconfig/node12": "^12.1.4",
     "@tsconfig/strictest": "^2.0.5",
     "@types/node-fetch": "^2.6.12",
     "@vitest/coverage-istanbul": "^3.0.3",
