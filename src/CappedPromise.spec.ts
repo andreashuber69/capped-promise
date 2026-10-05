@@ -11,7 +11,7 @@ const iterable = function *iterable() {
 };
 
 const delay = async <T>(delayMilliseconds: number, result: T) =>
-    await new Promise<T>((resolve) => setTimeout(() => resolve(result), delayMilliseconds));
+    await new Promise<T>((resolve) => void setTimeout(() => resolve(result), delayMilliseconds));
 
 type State = "init" | "pending" | "settled";
 

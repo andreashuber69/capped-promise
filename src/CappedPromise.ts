@@ -15,8 +15,8 @@ export default class CappedPromise {
      * function throws or an awaitable rejects.
      * @param maxPending The maximum number of awaitables that are allowed to be pending simultaneously.
      * @param createAwaitableIterable An iterable of parameterless functions that create and return an awaitable.
-     * @throws A {@link RangeError} when `maxPending` has either the wrong type or is smaller than 1.
-     * @throws A {@link TypeError} when any value in `createAwaitableIterable` is not a function.
+     * @throws {RangeError} when `maxPending` has either the wrong type or is smaller than 1.
+     * @throws {TypeError} when any value in `createAwaitableIterable` is not a function.
      */
     public static async all<T extends ReadonlyArray<() => unknown>>(
         maxPending: number,
@@ -47,8 +47,8 @@ export default class CappedPromise {
      * {@link Promise}, as follows: `() => Promise.reject(new Error("Oops!"))`.
      * @param maxPending The maximum number of awaitables that are allowed to be pending simultaneously.
      * @param createAwaitableIterable An iterable of parameterless functions that create and return an awaitable.
-     * @throws A {@link RangeError} when `maxPending` has either the wrong type or is smaller than 1.
-     * @throws A {@link TypeError} when any value in `createAwaitableIterable` is not a function.
+     * @throws {RangeError} when `maxPending` has either the wrong type or is smaller than 1.
+     * @throws {TypeError} when any value in `createAwaitableIterable` is not a function.
      */
     public static async allSettled<T extends ReadonlyArray<() => unknown>>(
         maxPending: number,
