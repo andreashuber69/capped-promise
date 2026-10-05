@@ -25,15 +25,15 @@ describe("CappedPromise", () => {
 
             const [result0, result1]: [number, string] = await CappedPromise.all(5, argument);
 
-            expect(result0 === 1);
-            expect(result1 === "hello");
+            expect(result0 === 1).toBe(true);
+            expect(result1 === "hello").toBe(true);
         });
 
         it("should correctly infer the types for iterables", async () => {
             const [result0, result1]: number[] = await CappedPromise.all(5, iterable());
 
-            expect(result0 === 1);
-            expect(result1 === 2);
+            expect(result0 === 1).toBe(true);
+            expect(result1 === 2).toBe(true);
         });
 
         it("should only create new awaitables when all previous ones are pending or settled", async () => {
@@ -42,9 +42,9 @@ describe("CappedPromise", () => {
             const argument = states.map((_, index, array) => (
                 async () => {
                     // Previous awaitables must be pending or settled
-                    expect(array.findIndex((state) => state !== "pending" && state !== "settled") === index);
+                    expect(array.findIndex((state) => state !== "pending" && state !== "settled") === index).toBe(true);
                     // Next awaitables must be in initial state
-                    expect(!array.slice(index).some((state) => state !== "init"));
+                    expect(!array.slice(index).some((state) => state !== "init")).toBe(true);
                     const promise = Promise.resolve(index);
                     array[index] = "pending";
 
@@ -60,12 +60,12 @@ describe("CappedPromise", () => {
             const results = await CappedPromise.all(3, argument);
 
             for (const [index, value] of results.entries()) {
-                expect(value === index);
+                expect(value === index).toBe(true);
             }
         });
 
         it("should fulfill with empty array if passed empty array", async () => {
-            expect((await CappedPromise.all(5, [])).length === 0);
+            expect((await CappedPromise.all(5, [])).length === 0).toBe(true);
         });
 
         it("should add results in the awaitable creation order", async () => {
@@ -78,7 +78,7 @@ describe("CappedPromise", () => {
             const results = await CappedPromise.all(3, argument);
 
             for (const [index, value] of results.entries()) {
-                expect(value === index);
+                expect(value === index).toBe(true);
             }
         });
 
@@ -116,10 +116,10 @@ describe("CappedPromise", () => {
             // in, the returned promise fulfills.
             const cappedResults = await CappedPromise.all(2, createCssPromises);
 
-            expect(cappedResults.length === promiseResults.length);
+            expect(cappedResults.length === promiseResults.length).toBe(true);
 
             for (const [index, result] of cappedResults.entries()) {
-                expect(result === promiseResults[index]);
+                expect(result === promiseResults[index]).toBe(true);
             }
             /* eslint-enable @typescript-eslint/promise-function-async */
         });
@@ -128,7 +128,7 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.all(0, []);
             } catch (error) {
-                expect(error instanceof RangeError && error.message === "maxPending is invalid: 0.");
+                expect(error instanceof RangeError && error.message === "maxPending is invalid: 0.").toBe(true);
             }
         });
 
@@ -137,7 +137,9 @@ describe("CappedPromise", () => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                 await CappedPromise.all(5, [42 as unknown as () => Promise<number>]);
             } catch (error) {
-                expect(error instanceof TypeError && error.message === "createAwaitable is not a function: 42.");
+                expect(error instanceof TypeError && error.message === "createAwaitable is not a function: 42.").toBe(
+                    true,
+                );
             }
         });
 
@@ -150,7 +152,7 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.all(1, argument);
             } catch (error) {
-                expect(error instanceof Error && error.message === "Boom!");
+                expect(error instanceof Error && error.message === "Boom!").toBe(true);
             }
         });
 
@@ -163,7 +165,7 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.all(2, argument);
             } catch (error) {
-                expect(error instanceof Error && error.message === "Boom!");
+                expect(error instanceof Error && error.message === "Boom!").toBe(true);
             }
         });
     });
@@ -178,16 +180,16 @@ describe("CappedPromise", () => {
             const [result0, result1]: [PromiseSettledResult<number>, PromiseSettledResult<string>] =
                 await CappedPromise.allSettled(5, argument);
 
-            expect((result0.status === "fulfilled" ? result0.value : undefined) === 1);
-            expect((result1.status === "fulfilled" ? result1.value : undefined) === "hello");
+            expect((result0.status === "fulfilled" ? result0.value : undefined) === 1).toBe(true);
+            expect((result1.status === "fulfilled" ? result1.value : undefined) === "hello").toBe(true);
         });
 
         it("should correctly infer the types for iterables", async () => {
             const [result0, result1]: Array<PromiseSettledResult<number>> =
                 await CappedPromise.allSettled(5, iterable());
 
-            expect((result0?.status === "fulfilled" ? result0.value : undefined) === 1);
-            expect((result1?.status === "fulfilled" ? result1.value : undefined) === 2);
+            expect((result0?.status === "fulfilled" ? result0.value : undefined) === 1).toBe(true);
+            expect((result1?.status === "fulfilled" ? result1.value : undefined) === 2).toBe(true);
         });
 
         it("should only create new awaitables when all previous ones are pending or settled", async () => {
@@ -196,9 +198,9 @@ describe("CappedPromise", () => {
             const argument = states.map((_, index, array) => (
                 async () => {
                     // Previous awaitables must be pending or settled
-                    expect(array.findIndex((state) => state !== "pending" && state !== "settled") === index);
+                    expect(array.findIndex((state) => state !== "pending" && state !== "settled") === index).toBe(true);
                     // Next awaitables must be in initial state
-                    expect(!array.slice(index).some((state) => state !== "init"));
+                    expect(!array.slice(index).some((state) => state !== "init")).toBe(true);
                     const promise = Promise.resolve(index);
                     array[index] = "pending";
 
@@ -214,12 +216,12 @@ describe("CappedPromise", () => {
             const results = await CappedPromise.allSettled(3, argument);
 
             for (const [index, value] of results.entries()) {
-                expect((value.status === "fulfilled" ? value.value : undefined) === index);
+                expect((value.status === "fulfilled" ? value.value : undefined) === index).toBe(true);
             }
         });
 
         it("should fulfill with empty array if passed empty array", async () => {
-            expect((await CappedPromise.allSettled(5, [])).length === 0);
+            expect((await CappedPromise.allSettled(5, [])).length === 0).toBe(true);
         });
 
         it("results should be added in the awaitable creation order", async () => {
@@ -232,7 +234,7 @@ describe("CappedPromise", () => {
             const results = await CappedPromise.allSettled(3, argument);
 
             for (const [index, value] of results.entries()) {
-                expect((value.status === "fulfilled" ? value.value : undefined) === index);
+                expect((value.status === "fulfilled" ? value.value : undefined) === index).toBe(true);
             }
         });
 
@@ -240,7 +242,7 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.allSettled(0, []);
             } catch (error) {
-                expect(error instanceof RangeError && error.message === "maxPending is invalid: 0.");
+                expect(error instanceof RangeError && error.message === "maxPending is invalid: 0.").toBe(true);
             }
         });
 
@@ -251,7 +253,9 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.allSettled(5, [createAwaitable]);
             } catch (error) {
-                expect(error instanceof TypeError && error.message === "createAwaitable is not a function: 42.");
+                expect(error instanceof TypeError && error.message === "createAwaitable is not a function: 42.").toBe(
+                    true,
+                );
             }
         });
 
@@ -264,7 +268,7 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.allSettled(1, argument);
             } catch (error) {
-                expect(error instanceof Error && error.message === "Boom!");
+                expect(error instanceof Error && error.message === "Boom!").toBe(true);
             }
         });
 
@@ -277,7 +281,7 @@ describe("CappedPromise", () => {
             try {
                 await CappedPromise.allSettled(2, argument);
             } catch (error) {
-                expect(error instanceof Error && error.message === "Boom!");
+                expect(error instanceof Error && error.message === "Boom!").toBe(true);
             }
         });
     });
